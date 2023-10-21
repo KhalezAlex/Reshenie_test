@@ -1,3 +1,5 @@
+package org.klozevitz.reshenie_test.entity;
+
 import java.time.LocalDate;
 
 public class Patient {
@@ -9,7 +11,7 @@ public class Patient {
     private String smo;
     private String snils;
     private String policy;
-    private Integer fin_source;
+    private Integer finSource;
 
     public Integer getId() {
         return id;
@@ -44,7 +46,7 @@ public class Patient {
     }
 
     public Integer getFin_source() {
-        return fin_source;
+        return finSource;
     }
 
     public Patient() {
@@ -57,7 +59,7 @@ public class Patient {
     }
 
     public Patient(Integer id, String fio, LocalDate birthDate, Integer sex,
-                   Integer num, String smo, String snils, String policy, Integer fin_source) {
+                   Integer num, String smo, String snils, String policy, Integer finSource) {
         this.id = id;
         this.fio = fio;
         this.birthDate = birthDate;
@@ -66,6 +68,21 @@ public class Patient {
         this.smo = smo;
         this.snils = snils;
         this.policy = policy;
-        this.fin_source = fin_source;
+        this.finSource = finSource;
+    }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "id=" + id +
+                ", fio='" + fio + '\'' +
+                ", birthDate=" + birthDate +
+                ", sex=" + sex +
+                ", num=" + num +
+                ", smo='" + smo + '\'' +
+                ", snils='" + snils + '\'' +
+                ", policy='" + policy + '\'' +
+                ", finSource=" + finSource +
+                "}\n";
     }
 }

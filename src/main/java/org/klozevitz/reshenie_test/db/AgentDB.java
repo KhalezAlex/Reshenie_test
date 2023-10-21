@@ -1,7 +1,11 @@
-import java.sql.*;
-import java.util.Arrays;
+package org.klozevitz.reshenie_test.db;
+
+import org.klozevitz.reshenie_test.entity.Patient;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
-import java.util.List;
+import java.sql.*;
 
 public class AgentDB {
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/etalon";
@@ -28,25 +32,45 @@ public class AgentDB {
         }
     }
 
-    public LinkedList<String> getPersonsByString(String query) {
-        LinkedList<String> persons = new LinkedList<>();
-        String baseQuery = "SELECT fio FROM java_tasks_patient WHERE";
+    public LinkedList<Patient> getPersonsByString(String query) {
+        LinkedList<Patient> patients = new LinkedList<>();
+        String baseQuery = "SELECT * FROM java_tasks_patient WHERE";
         String queryToExecute = queryToExecute(baseQuery, "fio", query.split(" "));
         try {
             Statement statement = this.connection.createStatement();
             ResultSet result = statement.executeQuery(queryToExecute);
             while (result.next()) {
-                persons.add(result.getString("fio"));
+                patients.add(getFromResult(result));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return persons;
+        return patients;
     }
 
-    private String queryToExecute(String query, String field,  String[] args) {
+    private Patient getFromResult(ResultSet result) throws SQLException {
+        return new Patient(
+                Integer.parseInt(result.getString("id")),
+                result.getString("fio"),
+                getDate(result.getString("birth_date")),
+                Integer.parseInt(result.getString("sex")),
+                Integer.parseInt(result.getString("num")),
+                result.getString("smo"),
+                result.getString("snils"),
+                result.getString("policy"),
+                Integer.parseInt(result.getString("fin_source")
+        ));
+    }
+
+    private LocalDate getDate(String date) {
+        String[] birthDate = date.split("-");
+        return LocalDate.of(Integer.parseInt(birthDate[0]),
+                Integer.parseInt(birthDate[1]), Integer.parseInt(birthDate[2]));
+    }
+
+    private String queryToExecute(String query, String field, String[] args) {
         StringBuilder sb = new StringBuilder(query);
-        for (String arg: args) {
+        for (String arg : args) {
             sb.append(" OR ")
                     .append(field)
                     .append(" LIKE '%")

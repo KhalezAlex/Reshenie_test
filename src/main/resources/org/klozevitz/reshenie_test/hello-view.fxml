@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.klozevitz.reshenie_test.HelloController">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
-
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutX="13.0" layoutY="46.0" prefHeight="75.0" prefWidth="874.0">
+         <center>
+            <Button id="query_btn" mnemonicParsing="false" text="Запрос" BorderPane.alignment="CENTER" />
+         </center>
+         <left>
+            <TextField id="textField_query" BorderPane.alignment="CENTER" />
+         </left>
+      </BorderPane>
+      <Pane layoutX="13.0" layoutY="150.0" prefHeight="393.0" prefWidth="874.0">
+         <children>
+            <TableView layoutX="14.0" layoutY="14.0" prefHeight="364.0" prefWidth="843.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Номер" fx:id="num"/>
+                <TableColumn prefWidth="75.0" text="СНИЛС" fx:id="snils"/>
+                <TableColumn prefWidth="75.0" text="Пол" fx:id="sex"/>
+                <TableColumn prefWidth="75.0" text="ФИО" fx:id="fio"/>
+                <TableColumn prefWidth="75.0" text="Дата рожд." fx:id="birthDate"/>
+                <TableColumn prefWidth="75.0" text="Возраст" fx:id="age"/>
+                <TableColumn prefWidth="75.0" text="Полис" fx:id="policy"/>
+                <TableColumn prefWidth="75.0" text="Ист. фин." fx:id="finSource"/>
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</Pane>
